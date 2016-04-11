@@ -1,0 +1,712 @@
+<html xmlns:tomboy="http://beatniksoftware.com/tomboy" xmlns:link="http://beatniksoftware.com/tomboy/link" xmlns:size="http://beatniksoftware.com/tomboy/size"><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Chef Training</title><style type="text/css">
+        
+	body {  }
+	h1 { font-size: xx-large;
+     	     font-weight: bold;
+     	     border-bottom: 1px solid black; }
+	div.note {
+		   position: relative;
+		   display: block;
+		   padding: 5pt;
+		   margin: 5pt; 
+		   white-space: -moz-pre-wrap; /* Mozilla */
+ 	      	   white-space: -pre-wrap;     /* Opera 4 - 6 */
+ 	      	   white-space: -o-pre-wrap;   /* Opera 7 */
+ 	      	   white-space: pre-wrap;      /* CSS3 */
+ 	      	   word-wrap: break-word;      /* IE 5.5+ */ }
+	</style></head><body><div class="note" id="Chef Training"><a name="chef training"></a><h1>Chef Training</h1>48:00 into first video with Dan
+1:03  into first video with Dan
+Install Chef slide 105
+
+<a style="color:#3465A4" href="https://manage.chef.io">https://manage.chef.io</a>
+Select Management Console to setup account
+
+Account:
+Organization: DircksOrganization
+Short Name: dircksorganization
+Full Name: Dirck Copeland
+Company: Chefmeister
+Email: <a style="color:#3465A4" href="dirckcopeland@gmail.com">dirckcopeland@gmail.com</a>
+Username:  chefmeister
+
+
+1:19:15 Dan explains importance of chef repo
+
+in the .chef directory on the workstation and run:
+knife cookbook list
+no cookbooks yet
+knife user list
+chefmesiter
+
+1:27:30 Dan summarizes the steps thta have been done so far:
+1) Just installed chef on the workstation
+2) setup the organization
+
+chef-repo contains important info about the keys, chef server, etc.
+
+in the .chef directory you have the following files:
+-rw-r--r--. 1 vagrant 1678 Mar 30  2016 chefmesiter.pem
+-rw-r--r--. 1 vagrant 1674 Mar 30  2016 dirck-validator.pem
+-rw-r--r--. 1 vagrant  526 Mar 30  2016 knife.rb
+
+
+[vagrant@chef-workstation .chef]$ knife client list
+dirck-validator
+
+Note: you must be in the .chef directory for this command to work!
+
+1:38:25 - share an organization - send an invite to another user to your organization
+
+
+Second Video 6:00
+On my VM workstation where I installed chef:
+curl -L <a style="color:#3465A4" href="https://www.opscode.com/chef/install.sh">https://www.opscode.com/chef/install.sh</a> | sudo bash
+(you will need to enter the root password here - it doesn't really prompt)
+
+
+[vagrant@chef-workstation chef-repo]$ knife bootstrap 52.10.61.232 --sudo -x centos -i <a style="color:#3465A4" href="~/.ssh/Dell-E6410-Taos-Account-dirck.pem">~/.ssh/Dell-E6410-Taos-Account-dirck.pem</a> -N "node1"
+
+
+
+Now back on the workstation:
+<span style="font-size:small"><span style="font-family:monospace">[vagrant@chef-workstation chef-repo]$ <span style="background:yellow">knife bootstrap 52.10.61.232 --sudo -x centos -i <a style="color:#3465A4" href="~/.ssh/Dell-E6410-Taos-Account-dirck.pem">~/.ssh/Dell-E6410-Taos-Account-dirck.pem</a></span></span></span><span style="font-size:small"><span style="font-family:monospace"><span style="background:yellow"> -N "node1"</span></span></span><span style="font-size:small"><span style="font-family:monospace">
+Doing old-style registration with the validation key at <a style="color:#3465A4" href="/home/vagrant/chef/chef-repo/.chef/dircksorganization-validator.pem...">/home/vagrant/chef/chef-repo/.chef/dircksorganization-validator.pem...</a></span></span><span style="font-size:small"><span style="font-family:monospace">
+Delete your validation key in order to use your user credentials instead
+
+Connecting to 52.10.61.232
+52.10.61.232 -----&gt; Installing Chef Omnibus (-v 12)
+52.10.61.232 downloading <a style="color:#3465A4" href="https://omnitruck-direct.chef.io/chef/install.sh">https://omnitruck-direct.chef.io/chef/install.sh</a></span></span><span style="font-size:small"><span style="font-family:monospace">
+52.10.61.232   to file <a style="color:#3465A4" href="/tmp/install.sh.9181/install.sh">/tmp/install.sh.9181/install.sh</a></span></span><span style="font-size:small"><span style="font-family:monospace">
+52.10.61.232 trying curl...
+52.10.61.232 el 7 x86_64
+52.10.61.232 Getting information for chef stable 12 for el...
+52.10.61.232 downloading <a style="color:#3465A4" href="https://omnitruck-direct.chef.io/stable/chef/metadata?v=12&amp;p=el&amp;pv=7&amp;m=x86_64">https://omnitruck-direct.chef.io/stable/chef/metadata?v=12&amp;p=el&amp;pv=7&amp;m=x86_64</a></span></span><span style="font-size:small"><span style="font-family:monospace">
+52.10.61.232   to file <a style="color:#3465A4" href="/tmp/install.sh.9187/metadata.txt">/tmp/install.sh.9187/metadata.txt</a></span></span><span style="font-size:small"><span style="font-family:monospace">
+52.10.61.232 trying curl...
+52.10.61.232 sha1       529f02f14d8af8ced469d615c61d1853183b47d2
+52.10.61.232 sha256     a9c80dfc45b5204684cb5344e77230ff3403a5f8d057dd063b0707d785ccd236
+52.10.61.232 url        <a style="color:#3465A4" href="https://packages.chef.io/stable/el/7/chef-12.8.1-1.el7.x86_64.rpm">https://packages.chef.io/stable/el/7/chef-12.8.1-1.el7.x86_64.rpm</a></span></span><span style="font-size:small"><span style="font-family:monospace">
+52.10.61.232 version    12.8.1
+52.10.61.232 downloaded metadata file looks valid...
+52.10.61.232 downloading <a style="color:#3465A4" href="https://packages.chef.io/stable/el/7/chef-12.8.1-1.el7.x86_64.rpm">https://packages.chef.io/stable/el/7/chef-12.8.1-1.el7.x86_64.rpm</a></span></span><span style="font-size:small"><span style="font-family:monospace">
+52.10.61.232   to file <a style="color:#3465A4" href="/tmp/install.sh.9187/chef-12.8.1-1.el7.x86_64.rpm">/tmp/install.sh.9187/chef-12.8.1-1.el7.x86_64.rpm</a></span></span><span style="font-size:small"><span style="font-family:monospace">
+52.10.61.232 trying curl...
+52.10.61.232 Comparing checksum with sha256sum...
+52.10.61.232 Installing chef 12
+52.10.61.232 installing with rpm...
+52.10.61.232 warning: <a style="color:#3465A4" href="/tmp/install.sh.9187/chef-12.8.1-1.el7.x86_64.rpm:">/tmp/install.sh.9187/chef-12.8.1-1.el7.x86_64.rpm:</a></span></span><span style="font-size:small"><span style="font-family:monospace"> Header V4 DSA/SHA1 Signature, key ID 83ef826a: NOKEY
+52.10.61.232 Preparing...                          ################################# [100%]
+52.10.61.232 Updating / installing...
+52.10.61.232    1:chef-12.8.1-1.el7                ################################# [100%]
+52.10.61.232 Thank you for installing Chef!
+52.10.61.232 Starting the first Chef Client run...
+52.10.61.232 Starting Chef Client, version 12.8.1
+52.10.61.232 Creating a new client identity for node1 using the validator key.
+52.10.61.232 resolving cookbooks for run list: []
+52.10.61.232 Synchronizing Cookbooks:
+52.10.61.232 Installing Cookbook Gems:
+52.10.61.232 Compiling Cookbooks...
+52.10.61.232 [2016-03-31T15:52:36+00:00] WARN: Node node1 has an empty run list.
+52.10.61.232 Converging 0 resources
+52.10.61.232 
+52.10.61.232 Running handlers:
+52.10.61.232 Running handlers complete
+52.10.61.232 Chef Client finished, 0/0 resources updated in 03 seconds</span></span>
+
+
+
+18:36 - Slide 166 - Verify your target instance Chef-client is configured Property
+21:35 - Slide 167 - Examine <a style="color:#3465A4" href="/etc/chef/client.rb">/etc/chef/client.rb</a>
+
+26:39 - Audio starts in video 2 of day 1
+
+42:00
+package "git"
+{
+yum install git
+apt-get install git
+pacman sync git
+pkg_add -r git
+
+
+
+
+Modify the default recipes as shown on slides 207 and index.html slide 209
+
+
+53:00 
+Always run from the chef-repo directory
+slide 209
+[vagrant@chef-workstation chef-repo]$ knife cookbook upload apache
+Uploading apache       [0.1.0]
+Uploaded 1 cookbook.
+
+[vagrant@chef-workstation chef-repo]$ knife cookbook list
+apache   0.1.0
+
+
+[vagrant@chef-workstation chef-repo]$ knife node run_list add node1 "recipe[apache]"
+node1:
+  run_list: recipe[apache]
+
+Slide 212
+Now on node1:
+[centos@ip-172-31-31-251 ~]$ <span style="background:yellow">sudo chef-client</span>
+Starting Chef Client, version 12.8.1
+resolving cookbooks for run list: ["apache"]
+Synchronizing Cookbooks:
+  - apache (0.1.0)
+Installing Cookbook Gems:
+Compiling Cookbooks...
+Converging 3 resources
+Recipe: apache::default
+  * yum_package[httpd] action install
+    - install version 2.4.6-40.el7.centos of package httpd
+  * service[httpd] action enable
+    - enable service service[httpd]
+  * service[httpd] action start
+    - start service service[httpd]
+  * cookbook_file[<a style="color:#3465A4" href="/var/www/html/index.html">/var/www/html/index.html</a>] action create
+    - create new file <a style="color:#3465A4" href="/var/www/html/index.html">/var/www/html/index.html</a>
+    - update content in file <a style="color:#3465A4" href="/var/www/html/index.html">/var/www/html/index.html</a> from none to 87b467
+    --- <a style="color:#3465A4" href="/var/www/html/index.html">/var/www/html/index.html</a>        2016-03-31 21:03:22.335126562 +0000
+    +++ <a style="color:#3465A4" href="/var/www/html/.chef-index.html20160331-17317-1dii977">/var/www/html/.chef-index.html20160331-17317-1dii977</a>    2016-03-31 21:03:22.335126562 +0000
+    @@ -1 +1,6 @@
+    +&lt;html&gt;
+    +&lt;body&gt;
+    +&lt;h1&gt;Hello, world!&lt;/h1&gt;
+    +&lt;/body&gt;
+    +&lt;/html&gt;
+    - change mode from '' to '0644'
+    - restore selinux security context
+
+Running handlers:
+Running handlers complete
+Chef Client finished, 4/4 resources updated in 08 seconds
+
+
+
+57:24
+Check the web site:
+<a style="color:#3465A4" href="dirck@lt-dirck:~/.ssh$">dirck@lt-dirck:~/.ssh$</a> wget <a style="color:#3465A4" href="http://ec2-52-10-61-232.us-west-2.compute.amazonaws.com">http://ec2-52-10-61-232.us-west-2.compute.amazonaws.com</a>
+
+
+<a style="color:#3465A4" href="http://ec2-52-10-61-232.us-west-2.compute.amazonaws.com">http://ec2-52-10-61-232.us-west-2.compute.amazonaws.com</a>
+<a style="color:#3465A4" href="http://ec2-52-37-51-57.us-west-2.compute.amazonaws.com">http://ec2-52-37-51-57.us-west-2.compute.amazonaws.com</a>
+
+One caveat is that if you need to udpate and run the command again:
+
+cd <a style="color:#3465A4" href="/home/vagrant/chef/chef-repo/cookbooks/apache">/home/vagrant/chef/chef-repo/cookbooks/apache</a>
+vagrant@chef-workstation apache]$ vi metadata.rb 
+and increment the version number:
+version          '0.1.0'
+to
+version          '0.1.1'
+
+and then rerun the command:
+
+1:08:09 slide 220 - Reading output from a chef run
+
+1:17  - Chef has two phases - Compile (ruby) and execution  phase
+Slide 250
+
+Phase 1        Slide 252
+Phase 2        Slide 253
+
+Node Object
+Slide 262 at 1:25
+
+40k size limit to the node
+ 
+List details on node:
+knife node show node1
+<span style="font-size:small"><span style="font-family:monospace">Node Name:   node1
+Environment: _default
+FQDN:        ip-172-31-31-251.us-west-2.compute.internal
+IP:          52.10.61.232
+Run List:    recipe[apache]
+Roles:       
+Recipes:     apache, apache::default
+Platform:    centos 7.2.1511
+Tags:  
+</span></span>
+Tons of detail:
+knife node show node1 -l
+
+
+[vagrant@chef-workstation default]$ knife node show node1 -a fqdn
+node1:
+  fqdn: ip-172-31-31-251.us-west-2.compute.internal
+
+1:37:40
+Attributes precedence 
+Slide 283
+• Automagically on the node itself (by Ohai)
+• In roles
+• In environments
+• In cookbook recipes
+• In cookbook attribute files
+
+Setting Attributes in the attributes/default.rb file:
+default["apache"]["dir"] = "/etc/apache2"
+
+People don't generally use this syntax of setting attributes - 1:39:43
+Setting Attributes in the attributes/default.rb file:
+node.default["apache"]["dir"] = "/etc/apache2"
+
+Video Day 1 Part 3
+
+Adding a attribute to the motd
+
+10:48 knife cookbook create motd  - slide 310
+
+add this:
+default["motd"]["company"] = "Chef"
+to file:
+cookbooks/motd/attributes/default.rb
+
+and add:
+template "/etc/motd" do
+source "motd.erb"
+mode "0644"
+end
+
+to file:
+cookbooks/motd/recipes/default.rb
+
+slide 315 
+
+
+vi cookbooks/motd/attributes/default.rb
+add 
+default<span style="background:yellow">["motd"]["company"]</span> = "Chef"
+
+then in 
+cookbooks/motd/templates/default/motd.erb
+add:
+This server is property of &lt;%= node<span style="background:yellow">["motd"]["company"]</span> %&gt;
+&lt;% if node["pci"]["in_scope"] -%&gt;
+This server is in-scope for PCI compliance
+&lt;% end -%&gt;
+
+The above is saying that  we are going to get the node attribute motd company and substitute it in 
+place where the text is. So Chef will be inserted into the text
+
+The "&lt;% end -%&gt;" part on the end says that there will be no newline after the text "This server is in-scope for PCI compliance"
+
+.erb stands for embedded ruby
+knife cookbook create pci
+knife cookbook upload pci
+
+
+Video Day 1 Part 3
+
+
+Day 2 video 1 of 2  1:32 - lose audio
+
+19:53 Dan shuts off the mic. back on at 21:40.
+
+24:21 Dan basically gets yo back to where the PCI and MOTD cookbooks will run.
+
+57:00 At this point we are done configuring the cookbooks/apache/recipes/default.rb and I just ended
+up loading the file from github:
+<a style="color:#3465A4" href="https://gist.github.com/8954699">https://gist.github.com/8954699</a> at the bottom of slide 374
+
+at 1:05:45 Dan gets into adding the templates now that the recipe:
+cookbooks/apache/recipes/default.rb
+is done.
+
+
+Working on file:
+cookbooks/apache/templates/default/custom.erb    - Slide 375
+
+Working on file - 1:13:23:
+cookbooks/apache/templates/default/index.html.erb - Slide 376
+
+Upload cookbook 1:16:08
+increment the version in the file:
+cookbooks/apache/metadata.rb
+
+Clowns
+<a style="color:#3465A4" href="http://ec2-52-37-51-57.us-west-2.compute.amazonaws.com">http://ec2-52-37-51-57.us-west-2.compute.amazonaws.com</a>
+Bears
+<a style="color:#3465A4" href="http://ec2-52-37-51-57.us-west-2.compute.amazonaws.com:81">http://ec2-52-37-51-57.us-west-2.compute.amazonaws.com:81</a>
+
+Thats it for Day 2 Video 1
+
+
+ Day 2 Video 2 ------------------------------------------
+
+Using Knife to search:
+
+[vagrant@chef-workstation chef-repo]$ knife search node "pci:*" -a pci
+1 items found
+
+node1:
+  pci:
+    in_scope: true
+
+search for all nodes:
+
+knife search node "*:*"      "attribute name:value"
+
+so in the file:
+cookbooks/pci/attributes/default.rb
+the entry:
+default["pci"]["in_scope"] = true
+says that "pci" and "scope" are attributes and true is the value
+
+
+Uses Solr 
+
+[vagrant@chef-workstation chef-repo]$ knife search node "ipaddress:172.31.31.251" -a ipaddress
+1 items found
+
+node1:
+  ipaddress: 172.31.31.251
+
+
+[vagrant@chef-workstation chef-repo]$ knife search node "ipaddress:172* AND platform_family:rhel"
+1 items found
+
+Node Name:   node1
+Environment: _default
+FQDN:        ip-172-31-31-251.us-west-2.compute.internal
+IP:          52.37.51.57
+Run List:    recipe[motd], recipe[users], role[webserver]
+Roles:       webserver
+Recipes:     motd, motd::default, users, users::default, apache, apache::default, users::groups
+Platform:    centos 7.2.1511
+Tags:        
+
+
+
+Searching examples until 11:25
+
+
+24:56  Data Bags and adding User Accounts
+
+Slide 411
+in the  directory:
+home/vagrant/chef/chef-repo
+create a data_bags/users directory
+mkdir data_bags
+mkdir data_bags/users
+
+Create a data_bag named users
+
+knife data_bag create users
+
+Audio is dead at 36:55
+
+added files:
+data_bags/users/bobo.json 
+data_bags/users/frank.json
+
+added users to data_bags
+[vagrant@chef-workstation chef-repo]$ knife data_bag from file users bobo.json
+Updated data_bag_item[users::bobo]
+[vagrant@chef-workstation chef-repo]$ knife data_bag from file users frank.json
+Updated data_bag_item[users::frank]
+
+search all users in data_bags
+[vagrant@chef-workstation chef-repo]$ knife search users "*:*"
+2 items found
+
+chef_type: data_bag_item
+comment:   Bobo T. Clown
+data_bag:  users
+gid:       0
+home:      <a style="color:#3465A4" href="/home/bobo">/home/bobo</a>
+id:        bobo
+shell:     <a style="color:#3465A4" href="/bin/bash">/bin/bash</a>
+uid:       2000
+
+chef_type: data_bag_item
+comment:   Frank Belson
+data_bag:  users
+gid:       0
+home:      <a style="color:#3465A4" href="/home/frank">/home/frank</a>
+id:        frank
+shell:     <a style="color:#3465A4" href="/bin/bash">/bin/bash</a>
+uid:       2001
+
+
+
+ search a specific users to see what shell they are running:
+[vagrant@chef-workstation chef-repo]$ <span style="background:yellow">knife search users "id:bobo" -a shell</span>
+1 items found
+
+:
+  shell: <a style="color:#3465A4" href="/bin/bash">/bin/bash</a>
+
+
+Create groups data_bags:
+
+vagrant@chef-workstation chef-repo]$ mkdir data_bags/groups
+[vagrant@chef-workstation chef-repo]$ knife data_bag create groups
+Created data_bag[groups]
+
+created groups file:
+data_bags/groups/clowns.json
+
+[vagrant@chef-workstation chef-repo]$ knife data_bag from file groups clowns.json
+Updated data_bag_item[groups::clowns]
+
+search for all users in the groups:
+[vagrant@chef-workstation chef-repo]$ knife search groups "*:*"
+1 items found
+
+chef_type: data_bag_item
+data_bag:  groups
+gid:       3000
+id:        clowns
+members:
+  bobo
+  frank
+
+create users cookbook:
+knife cookbook create users
+[vagrant@chef-workstation chef-repo]$ knife cookbook create users
+** Creating cookbook users in <a style="color:#3465A4" href="/home/vagrant/chef/chef-repo/cookbooks">/home/vagrant/chef/chef-repo/cookbooks</a>
+** Creating README for cookbook: users
+** Creating CHANGELOG for cookbook: users
+** Creating metadata for cookbook: users
+
+add code to the users recipe:
+vi cookbooks/users/recipes/default.rb
+
+created groups.rb recipe:
+vi cookbooks/users/recipes/groups.rb
+
+Upload the cookbook adn add it to the run list:
+
+[vagrant@chef-workstation chef-repo]$ knife cookbook upload users
+Uploading users          [0.1.0]
+Uploaded 1 cookbook.
+[vagrant@chef-workstation chef-repo]$ knife node run_list add node1 'recipe[users]'
+node1:
+  run_list:
+    recipe[apache]
+    recipe[motd]
+    recipe[users]
+
+On the chef client run the chef-client
+
+[centos@ip-172-31-31-251 ~]$ sudo chef-client
+Starting Chef Client, version 12.8.1
+resolving cookbooks for run list: ["apache", "motd", "users"]
+Synchronizing Cookbooks:
+  - motd (0.1.0)
+  - pci (0.1.0)
+  - apache (0.2.2)
+  - users (0.1.0)
+Installing Cookbook Gems:
+Compiling Cookbooks...
+Converging 13 resources
+Recipe: apache::default
+  * yum_package[httpd] action install (up to date)
+  * service[httpd] action enable (up to date)
+  * service[httpd] action start (up to date)
+  * execute[mv <a style="color:#3465A4" href="/etc/httpd/conf.d/welcome.conf">/etc/httpd/conf.d/welcome.conf</a> <a style="color:#3465A4" href="/etc/httpd/conf.d/welcome.conf.disabled]">/etc/httpd/conf.d/welcome.conf.disabled]</a> action run (skipped due to only_if)
+  * template[<a style="color:#3465A4" href="/etc/httpd/conf.d/clowns.conf">/etc/httpd/conf.d/clowns.conf</a>] action create (up to date)
+  * directory[<a style="color:#3465A4" href="/srv/apache/clowns">/srv/apache/clowns</a>] action create (up to date)
+  * template[<a style="color:#3465A4" href="/srv/apache/clowns/index.html">/srv/apache/clowns/index.html</a>] action create (up to date)
+  * template[<a style="color:#3465A4" href="/etc/httpd/conf.d/bears.conf">/etc/httpd/conf.d/bears.conf</a>] action create (up to date)
+  * directory[<a style="color:#3465A4" href="/srv/apache/bears">/srv/apache/bears</a>] action create (up to date)
+  * template[<a style="color:#3465A4" href="/srv/apache/bears/index.html">/srv/apache/bears/index.html</a>] action create (up to date)
+Recipe: motd::default
+  * template[<a style="color:#3465A4" href="/etc/motd">/etc/motd</a>] action create (up to date)
+Recipe: users::default
+  * user[bobo] action create
+    - create user bobo
+  * user[frank] action create
+    - create user frank
+Recipe: users::groups
+  * group[clowns] action create
+    - create group clowns
+
+Running handlers:
+Running handlers complete
+Chef Client finished, 3/14 resources updated in 06 seconds
+
+1:04:46 Roles Slide 435
+<b>create the web server role:</b>
+roles/webserver.rb
+[vagrant@chef-workstation chef-repo]$ vi roles/webserver.rb
+[vagrant@chef-workstation chef-repo]$ knife role from file webserver.rb
+Updated Role webserver!
+
+<b>Now look at the role:</b>
+[vagrant@chef-workstation chef-repo]$ knife role show webserver
+chef_type:           role
+default_attributes:
+  apache:
+    sites:
+      admin:
+        port: 8000
+description:         Web Server
+env_run_lists:
+json_class:          Chef::Role
+name:                webserver
+override_attributes:
+run_list:            recipe[apache]
+
+<b>Search for role:</b>
+[vagrant@chef-workstation chef-repo]$ knife search role "run_list:recipe\[apache\]"
+1 items found
+
+chef_type:           role
+default_attributes:
+  apache:
+    sites:
+      admin:
+        port: 8000
+description:         Web Server
+env_run_lists:
+json_class:          Chef::Role
+name:                webserver
+override_attributes:
+run_list:            recipe[apache]
+
+
+Go into the web GUI and change the run list in the web interface to include the webserver role in the current run list and move out the apache recipe and it will still work the same.
+
+
+modify the file:
+roles/webserver.rb
+to include the code:
+      "bears" =&gt; {
+      "port" =&gt; 8081
+      }
+which changes  the port on the bears web server from 81 to 8081 
+
+Now change the role:
+knife role from file webserver.rb
+
+show the changes:
+knife role show webserver
+
+Upload the role:
+knife role from file webserver.rb
+
+Run sudo chef-client on the node
+
+Check the web site:
+<a style="color:#3465A4" href="http://ec2-52-37-51-57.us-west-2.compute.amazonaws.com:8081/">http://ec2-52-37-51-57.us-west-2.compute.amazonaws.com:8081/</a>
+
+
+
+Slide 449
+Display the apache.sites attribute on all nodes with  webserver role
+
+[vagrant@chef-workstation chef-repo]$ <span style="background:yellow">knife search node "role:webserver" -a apache.sites</span>
+1 items found
+
+node1:
+  apache.sites:
+    admin:
+      port: 8000
+    bears:
+      port: 8081
+    clowns:
+      port: 80
+
+1:30 into video starts Environments slide 466
+
+
+create environment directory and file and upload:
+[vagrant@chef-workstation chef-repo]$ <span style="background:yellow">knife environment from file dev.rb</span>
+Updated Environment dev
+
+Show the environment:
+[vagrant@chef-workstation chef-repo]$ <span style="background:yellow">knife environment show dev</span>
+chef_type:           environment
+cookbook_versions:
+  apache: = 0.2.2
+default_attributes:
+description:         For developers!
+json_class:          Chef::Environment
+name:                dev
+override_attributes:
+
+
+Environments are like roles, the only thing is you don't have run lists in environments and you can hard code cookbook versions in environments.
+
+1:35:22 - SuperMarket Slide 487
+
+Supermarket authenticates against your chef server. when you sign into the supermarket (slide 490)
+<a style="color:#3465A4" href="https://supermarket.getchef.com">https://supermarket.getchef.com</a>
+Email: <a style="color:#3465A4" href="dirckcopeland@gmail.com">dirckcopeland@gmail.com</a>
+Username:  chefmeister
+PW: Ci
+
+
+Downloaded the chef development environment ChefDK here <a style="color:#3465A4" href="https://downloads.chef.io/chef-dk/redhat/">https://downloads.chef.io/chef-dk/redhat/</a>
+and scp'ed to my chef vm workstation and Installed with command:
+sudo rpm -Uvh chefdk-0.12.0-1.el7.x86_64.rpm
+
+
+Dan gives an example of installing sensu at 1:39:26
+
+[vagrant@chef-workstation chef-repo]$ <span style="background:yellow">berks cookbook mysensu</span>
+      create  mysensu/files/default
+      create  mysensu/templates/default
+      create  mysensu/attributes
+      create  mysensu/libraries
+      create  mysensu/providers
+      create  mysensu/recipes
+      create  mysensu/resources
+      create  mysensu/recipes/default.rb
+      create  mysensu/metadata.rb
+      create  mysensu/LICENSE
+      create  mysensu/README.md
+      create  mysensu/CHANGELOG.md
+      create  mysensu/Berksfile
+      create  mysensu/Thorfile
+      create  mysensu/chefignore
+      create  mysensu/.gitignore
+      create  mysensu/Gemfile
+      create  .kitchen.yml
+    conflict  chefignore
+Overwrite <a style="color:#3465A4" href="/home/vagrant/chef/chef-repo/mysensu/chefignore?">/home/vagrant/chef/chef-repo/mysensu/chefignore?</a> (enter "h" for help) [Ynaqdh] Y
+       force  chefignore
+      append  Thorfile
+      create  test/integration/default
+      append  .gitignore
+      append  .gitignore
+      append  Gemfile
+      append  Gemfile
+You must run `bundle install' to fetch any new gems.
+      create  mysensu/Vagrantfile
+
+
+
+[vagrant@chef-workstation mysensu]$ berks install
+Resolving cookbook dependencies...
+Fetching 'mysensu' from source at .
+Fetching cookbook index from <a style="color:#3465A4" href="https://supermarket.chef.io...">https://supermarket.chef.io...</a>
+Installing build-essential (3.2.0)
+Installing apt (3.0.0)
+Installing chef_handler (1.3.0)
+Installing dpkg_autostart (0.2.0)
+Installing erlang (2.1.1)
+Using mysensu (0.1.0) from source at .
+Installing rabbitmq (4.7.0)
+Installing redisio (2.3.0)
+Installing sensu (2.12.0)
+Installing seven_zip (2.0.0)
+Installing ulimit (0.3.3)
+Installing windows (1.39.2)
+Installing yum (3.10.0)
+Installing yum-epel (0.6.6)
+Installing yum-erlang_solutions (0.3.1)
+
+
+left off with a review of everything at 1:25:23 slide 461
+
+Chef Training OpsCode Vimeo
+Day 1 - Alex Dryer 16:00 
+
+
+</div></body></html>
